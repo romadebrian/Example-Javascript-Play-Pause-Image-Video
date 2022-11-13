@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Latihan Javascript 2</title>
+  </head>
+  <body>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div
+        style="
+          display: flex;
+          background-color: red;
+          width: 500px;
+          height: 500px;
+          align-items: center;
+          justify-content: center;
+        "
+        id="ImageBox"
+      >
+        <img src="Gambar/1.png" alt="brid" id="gambarnya" />
+      </div>
+
+      <input id="status" value="Stop" />
+      <button onclick="mulai()">Mulai</button>
+      <button onclick="berhenti()">Berhenti</button>
+
+      <video id="video1" width="0">
+        <source
+          src="【original】シャンデリア【ホロライブ-紫咲シオン】.mp4"
+          type="video/mp4"
+        />
+        <!-- Jika browser tidak support -->
+        Your browser does not support HTML video.
+      </video>
+    </div>
+  </body>
+  <script>
+    let nIntervId;
+    var myVideo = document.getElementById("video1");
+
+    function mulai() {
+      nIntervId = setInterval(gantiWarna, 100);
+      myVideo.play();
+
+      document.getElementById("status").value = "Play";
+    }
+
+    function berhenti() {
+      clearInterval(nIntervId);
+      nIntervId = null;
+      myVideo.pause();
+
+      document.getElementById("status").value = "Stop";
+    }
+
+    function gantiWarna() {
+      playGambar();
+
+      r = Math.floor(Math.random() * 255);
+      g = Math.floor(Math.random() * 255);
+      b = Math.floor(Math.random() * 255);
+
+      exampleHexColor = "0,255,0";
+
+      hex = String(r) + "," + String(g) + "," + String(b);
+
+      document.getElementById("ImageBox").style.backgroundColor = `rgb(${hex})`;
+      console.log(hex);
+    }
+
+    i = 0;
+    function playGambar() {
+      i++;
+
+      if (i === 10) {
+        i = 1;
+      }
+
+      document.getElementById("gambarnya").src = `Gambar/${i}.png`;
+    }
+  </script>
+</html>
